@@ -1,10 +1,12 @@
+import {apiKey} from "./config.js";
+const key = apiKey.key;
 
 function getData() {
     let Weather = {
-        apiKey: "808e0c9b54f6aacec3566d6e9ff35b3d",
+        //apiKey: "808e0c9b54f6aacec3566d6e9ff35b3d",
         getCity : document.getElementById("city").value,
         fetchFunction : function weatherFunction() {
-            fetch('https://api.openweathermap.org/data/2.5/weather?q='+ this.getCity + '&appid=' + this.apiKey)
+            fetch('https://api.openweathermap.org/data/2.5/weather?q='+ this.getCity + '&appid=' + key)
                 .then(response => response.json())
                 .then(data => {
                     const weatherDiv = document.getElementById("weather")
@@ -30,7 +32,7 @@ function getData() {
                     weatherDiv.appendChild(p2)
                     weatherDiv.appendChild(p3)
                     weatherDiv.appendChild(p4)
-                    
+
                     console.log(main)});
         }, 
     }
