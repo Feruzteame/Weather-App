@@ -6,7 +6,32 @@ function getData() {
         fetchFunction : function weatherFunction() {
             fetch('https://api.openweathermap.org/data/2.5/weather?q='+ this.getCity + '&appid=' + this.apiKey)
                 .then(response => response.json())
-                .then(data => console.log(data));
+                .then(data => {
+                    const weatherDiv = document.getElementById("weather")
+                    const main = data.main
+                    const tempMin = main.temp_min
+                    const tempMax = main.temp_max 
+                    const weatherMain = data.weather[0].main 
+                    const description = data.weather[0].description 
+                    const wind = data.wind
+                    const windSpeed = wind.speed
+                    
+                    const p1 = document.createElement("p")
+                    const p2 = document.createElement("p")
+                    const p3 = document.createElement("p")
+                    const p4 = document.createElement("p")
+
+                    p1.innerText = weatherMain
+                    p2.innerText =  description
+                    p3.innerText = tempMin ,tempMax
+                    p4.innerText = windSpeed
+
+                    weatherDiv.appendChild(p1)
+                    weatherDiv.appendChild(p2)
+                    weatherDiv.appendChild(p3)
+                    weatherDiv.appendChild(p4)
+                    
+                    console.log(main)});
         }, 
     }
     Weather.fetchFunction()
