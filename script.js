@@ -1,8 +1,27 @@
+// let array =[]
+// let array1 = []
+// let array2 = []
+// let array3 = []
+// let array4 = []
+// let array5 = []
+function selectTime() {
 
+    const t = new Date();
+    const date = ('0' + t.getDate()).slice(-2);
+    const month = ('0' + (t.getMonth() + 1)).slice(-2);
+    const year = t.getFullYear();
+    const hours = ('0' + t.getHours()).slice(-2);
+    const minutes = ('0' + t.getMinutes()).slice(-2);
+    const seconds = ('0' + t.getSeconds()).slice(-2);
+    const time = `${year}-${month}-${date} ${hours}:${minutes}:${seconds}`;
+
+    console.log(time)    
+        return time;
+                     
+}
 
 import {apiKey} from "./config.js";
 const key = apiKey.key;
-// fetch('https://api.openweathermap.org/data/2.5/weather?q='+ this.getCity + '&appid=' + key)
 function getData() {
     let Weather = {
         //apiKey: "808e0c9b54f6aacec3566d6e9ff35b3d",
@@ -12,13 +31,18 @@ function getData() {
             fetch('https://api.openweathermap.org/data/2.5/forecast?q=' + this.getCity + '&appid='+ key)
                 .then(response => response.json())
                 .then(data => {
+
                     let listDate = data.list
+                   
+                    const returnTime = selectTime();
                     for(let i=0; i<listDate.length; i++){
                         let date = listDate[i]
                         let day = date.dt_txt
                         let main = listDate[i].main
                         let temp = main.temp
-                        console.log(temp, day)
+                        console.log()
+                        
+                       
                     }
                     console.log(data)
                 });
@@ -30,6 +54,13 @@ function getData() {
 
 const submit = document.getElementById("submit")
 submit.addEventListener('click', getData)
+
+
+
+
+
+
+
 
 
 // let weatherDiv = document.getElementById("weather")
