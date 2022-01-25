@@ -1,3 +1,5 @@
+const weatherBox = document.getElementById('wheater');
+
 // let array =[]
 // let array1 = []
 // let array2 = []
@@ -20,19 +22,30 @@ function selectTime() {
                      
 }
 
-import {apiKey} from "./config.js";
-const key = apiKey.key;
+import {Data} from "./config.js";
+const key = Data.key;
 function getData() {
     let Weather = {
         //apiKey: "808e0c9b54f6aacec3566d6e9ff35b3d",
         getCity : document.getElementById("city").value,
         fetchFunction : function weatherFunction() {
             
-            fetch('https://api.openweathermap.org/data/2.5/forecast?q=' + this.getCity + '&appid='+ key)
+            fetch('https://api.openweathermap.org/data/2.5/forecast?q=' + this.getCity + '&units=metric' + '&appid='+ key)
                 .then(response => response.json())
                 .then(data => {
 
                     let listDate = data.list
+
+                    console.log(listDate[0].dt_txt);
+                    const currentTemp = document.createElement('p');
+                    const temp = listDate[0].main.temp + ' °C';
+                    console.log(temp)
+                    // currentTemp.innerHTML = temp.toString();
+
+                    // weatherBox.appendChild(currentTemp);
+                    
+
+                    
                    
                     const returnTime = selectTime();
                     for(let i=0; i<listDate.length; i++){
@@ -40,11 +53,11 @@ function getData() {
                         let day = date.dt_txt
                         let main = listDate[i].main
                         let temp = main.temp
-                        console.log()
+                        console.log(day)
                         
                        
                     }
-                    console.log(data)
+                    // console.log(data)
                 });
         }
     }
