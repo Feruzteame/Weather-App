@@ -1,64 +1,76 @@
-const weatherBox = document.getElementById('wheater');
-
-// let array =[]
-// let array1 = []
-// let array2 = []
-// let array3 = []
-// let array4 = []
-// let array5 = []
-function selectTime() {
-
-    const t = new Date();
-    const date = ('0' + t.getDate()).slice(-2);
-    const month = ('0' + (t.getMonth() + 1)).slice(-2);
-    const year = t.getFullYear();
-    const hours = ('0' + t.getHours()).slice(-2);
-    const minutes = ('0' + t.getMinutes()).slice(-2);
-    const seconds = ('0' + t.getSeconds()).slice(-2);
-    const time = `${year}-${month}-${date} ${hours}:${minutes}:${seconds}`;
-
-    console.log(time)    
-        return time;
-                     
-}
 
 import {Data} from "./config.js";
 const key = Data.key;
+const weatherBox = document.getElementById('wheater');
+//collect date
+
+
+
+let arrayOfTemp = []
+
+let arrayOfTemp1 = [] 
+
+function findAv() {
+    const totalTemp = arrayOfTemp.reduce((a, b) => a + b, 0)
+     let arrLength = arrayOfTemp.length
+     const avTemp = totalTemp/arrLength
+     console.log(arrayOfTemp, avTemp)
+     return avTemp
+  }
+
+
 function getData() {
     let Weather = {
-        //apiKey: "808e0c9b54f6aacec3566d6e9ff35b3d",
         getCity : document.getElementById("city").value,
         fetchFunction : function weatherFunction() {
             
             fetch('https://api.openweathermap.org/data/2.5/forecast?q=' + this.getCity + '&units=metric' + '&appid='+ key)
                 .then(response => response.json())
                 .then(data => {
-
-                    let listDate = data.list
-
-                    console.log(listDate[0].dt_txt);
-                    const currentTemp = document.createElement('p');
-                    const temp = listDate[0].main.temp + ' °C';
-                    console.log(temp)
-                    // currentTemp.innerHTML = temp.toString();
-
-                    // weatherBox.appendChild(currentTemp);
-                    
-
-                    
-                   
-                    const returnTime = selectTime();
-                    for(let i=0; i<listDate.length; i++){
-                        let date = listDate[i]
-                        let day = date.dt_txt
-                        let main = listDate[i].main
+                    console.log(data)
+                    let listData = data.list
+        
+                    // loop all
+                    for(let i=0; i<listData.length; i++){
+                        let date = listData[i]
+                        let dayOb = date.dt_txt
+                        let main = listData[i].main
                         let temp = main.temp
-                        console.log(day)
+                        // change date to time
+                        var dateObject = new Date(dayOb)
+                        var day = new Date();
+                        let date1 = day.getDate()
+                        let date2 = dateObject.getDate()
+                       let tomorrow = day.setDate(new Date().getDate()+1);
                         
+                        if(date1 === date2){
+                            console.log("yes")
+                            arrayOfTemp.push(temp)
+                        }else{
+                            // date1 = day.setDate(new Date(date2))
+                            // if(date1 === tomorrow){
+                            //     arrayOfTemp1.push(temp)
+                            //     console.log(arrayOfTemp1.length, arrayOfTemp1)
+                            //     console.log(date1)
+                            // }else{
+                            //     console.log("no")
+                            // }
+                            
+                        }
+                        
+                        
+
+
                        
-                    }
-                    // console.log(data)
+                       }
+                       
+                       findAv()
+                      
                 });
+                
+               
+                //console.log(arrayOfTemp)
+               
         }
     }
     Weather.fetchFunction()
@@ -67,13 +79,6 @@ function getData() {
 
 const submit = document.getElementById("submit")
 submit.addEventListener('click', getData)
-
-
-
-
-
-
-
 
 
 // let weatherDiv = document.getElementById("weather")
@@ -126,3 +131,5 @@ submit.addEventListener('click', getData)
                     // weatherDiv.appendChild(p2)
                     // weatherDiv.appendChild(p3)
                     // weatherDiv.appendChild(p4)
+
+               
