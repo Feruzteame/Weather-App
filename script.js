@@ -7,8 +7,7 @@ const weatherBox = document.getElementById('wheater');
 
 
 let arrayOfTemp = []
-
-let arrayOfTemp1 = [] 
+let arrayOfTemp1 = []
 
 function findAv() {
     const totalTemp = arrayOfTemp.reduce((a, b) => a + b, 0)
@@ -32,51 +31,43 @@ function getData() {
         
                     // loop all
                     for(let i=0; i<listData.length; i++){
-                        let date = listData[i]
-                        let dayOb = date.dt_txt
+                        let rowData = listData[i]
                         let main = listData[i].main
                         let temp = main.temp
-                        // change date to time
-                        var dateObject = new Date(dayOb)
-                        var day = new Date();
-                        let date1 = day.getDate()
-                        let date2 = dateObject.getDate()
-                       let tomorrow = day.setDate(new Date().getDate()+1);
                         
-                        if(date1 === date2){
-                            console.log("yes")
+                        // create  date obj
+                        var dateObject = new Date();
+                        
+                        // current date of today
+                        let firstDate = dateObject.getDate()
+                        let nextDate = dateObject.setDate(firstDate+1);
+
+                        
+                        // change string -> date object
+                        let record_dt_txt= rowData.dt_txt
+                        var recordDateObject = new Date(record_dt_txt)
+                        let recordDate = recordDateObject.getDate()
+                        
+                         if(firstDate === recordDate){
                             arrayOfTemp.push(temp)
-                        }else{
-                            // date1 = day.setDate(new Date(date2))
-                            // if(date1 === tomorrow){
-                            //     arrayOfTemp1.push(temp)
-                            //     console.log(arrayOfTemp1.length, arrayOfTemp1)
-                            //     console.log(date1)
-                            // }else{
-                            //     console.log("no")
-                            // }
-                            
+                        } else{
+                            recordDate = dateObject.setDate(new Date(recordDate))
+                            if(nextDate === recordDate){
+                                    arrayOfTemp1.push(temp)
+                                    console.log(arrayOfTemp1.length, arrayOfTemp1, record_dt_txt)
+                                    nextDate = dateObject.setDate(firstDate+1)
+                            }else {
+                                console.log("no no")
+                            }
                         }
-                        
-                        
-
-
-                       
-                       }
-                       
+                          }
                        findAv()
-                      
-                });
-                
-               
-                //console.log(arrayOfTemp)
-               
-        }
-    }
+                     });
+                }
+            }
     Weather.fetchFunction()
-}
-
-
+  }
+  
 const submit = document.getElementById("submit")
 submit.addEventListener('click', getData)
 
