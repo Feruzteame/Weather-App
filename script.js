@@ -1,75 +1,74 @@
 
-import {Data} from "./config.js";
-const key = Data.key;
-const weatherBox = document.getElementById('wheater');
-//collect date
+// import {Config} from "./config.js";
+// const key = Config.key;
+
+// const weatherBox = document.getElementById('wheater');
 
 
+// let arrayOfTemp = []
+// let arrayOfTemp1 = []
 
-let arrayOfTemp = []
-let arrayOfTemp1 = []
-
-function findAv() {
-    const totalTemp = arrayOfTemp.reduce((a, b) => a + b, 0)
-     let arrLength = arrayOfTemp.length
-     const avTemp = totalTemp/arrLength
-     console.log(arrayOfTemp, avTemp)
-     return avTemp
-  }
+// function getAverage() {
+//     const totalTemp = arrayOfTemp.reduce((a, b) => a + b, 0)
+//      let arrLength = arrayOfTemp.length
+//      const avTemp = totalTemp/arrLength
+//      console.log(arrayOfTemp, avTemp)
+//      return avTemp
+//   }
 
 
-function getData() {
-    let Weather = {
-        getCity : document.getElementById("city").value,
-        fetchFunction : function weatherFunction() {
+// function getWeatherData() {
+//     let Weather = {
+//         getCity : document.getElementById("city").value,
+//         fetchFunction : function weatherFunction() {
             
-            fetch('https://api.openweathermap.org/data/2.5/forecast?q=' + this.getCity + '&units=metric' + '&appid='+ key)
-                .then(response => response.json())
-                .then(data => {
-                    console.log(data)
-                    let listData = data.list
+//             fetch('https://api.openweathermap.org/data/2.5/forecast?q=' + this.getCity + '&units=metric' + '&appid='+ key)
+//                 .then(response => response.json())
+//                 .then(data => {
+//                     console.log(data)
+//                     let listData = data.list
         
-                    // loop all
-                    for(let i=0; i<listData.length; i++){
-                        let rowData = listData[i]
-                        let main = listData[i].main
-                        let temp = main.temp
+//                     // loop all
+//                     for(let i=0; i<listData.length; i++){
+//                         let rowData = listData[i]
+//                         let main = listData[i].main
+//                         let temp = main.temp
                         
-                        // create  date obj
-                        var dateObject = new Date();
+//                         // create  date obj
+//                         var dateObject = new Date();
                         
-                        // current date of today
-                        let firstDate = dateObject.getDate()
-                        let nextDate = dateObject.setDate(firstDate+1);
+//                         // current date of today
+//                         let firstDate = dateObject.getDate()
+//                         let nextDate = dateObject.setDate(firstDate+1);
 
                         
-                        // change string -> date object
-                        let record_dt_txt= rowData.dt_txt
-                        var recordDateObject = new Date(record_dt_txt)
-                        let recordDate = recordDateObject.getDate()
+//                         // change string -> date object
+//                         let record_dt_txt= rowData.dt_txt
+//                         var recordDateObject = new Date(record_dt_txt)
+//                         let recordDate = recordDateObject.getDate()
                         
-                         if(firstDate === recordDate){
-                            arrayOfTemp.push(temp)
-                        } else{
-                            recordDate = dateObject.setDate(new Date(recordDate))
-                            if(nextDate === recordDate){
-                                    arrayOfTemp1.push(temp)
-                                    console.log(arrayOfTemp1.length, arrayOfTemp1, record_dt_txt)
-                                    nextDate = dateObject.setDate(firstDate+1)
-                            }else {
-                                console.log("no no")
-                            }
-                        }
-                          }
-                       findAv()
-                     });
-                }
-            }
-    Weather.fetchFunction()
-  }
-  
-const submit = document.getElementById("submit")
-submit.addEventListener('click', getData)
+//                          if(firstDate === recordDate){
+//                             arrayOfTemp.push(temp)
+//                         } else{
+//                             recordDate = dateObject.setDate(new Date(recordDate))
+//                             if(nextDate === recordDate){
+//                                     arrayOfTemp1.push(temp)
+//                                     console.log(arrayOfTemp1.length, arrayOfTemp1, record_dt_txt)
+//                                     nextDate = dateObject.setDate(firstDate+1)
+//                             }else {
+//                                 console.log("no no")
+//                             }
+//                         }
+//                           }
+//                        getAverage()
+//                      });
+//                 }
+//             }
+//     Weather.fetchFunction()
+//   }
+
+// const submit = document.getElementById("submit")
+// submit.addEventListener('click', getWeatherData)
 
 
 // let weatherDiv = document.getElementById("weather")
@@ -123,4 +122,56 @@ submit.addEventListener('click', getData)
                     // weatherDiv.appendChild(p3)
                     // weatherDiv.appendChild(p4)
 
-               
+import {Config} from "./config.js";
+const key = Config.key;
+
+const getWeatherData = function() {
+    let Weather = {
+        
+        getCity : document.getElementById("city").value,
+        days_record : [],
+    
+        fetchData : function fetchData() {
+            fetch('https://api.openweathermap.org/data/2.5/forecast?q=' + this.getCity + '&units=metric' + '&appid='+ key)
+            .then(response => response.json())
+            .then(data => {
+                let listData = data.list
+                this.dayData(listData)
+            })
+        },
+
+        dayData : function dayData(listData) {
+            let firstDay = new Date()
+            let day_record = []
+
+            this.separateDailyRecord(listData, firstDay, day_record)
+            console.log(this.days_record);
+            
+
+        },
+
+        separateDailyRecord : function separateDailyRecord(listData,firstDay, day_record) {
+            listData.forEach(rowData => {
+                const recordDate = new Date(rowData.dt_txt).getDate()
+        
+                if (firstDay.getDate() === recordDate) {
+                    day_record.push(rowData.main.temp)
+                } else {
+                    this.days_record.push(day_record)
+                    day_record = []
+
+                    let dt_next = firstDay.setDate(firstDay.getDate() + 1)
+                    firstDay = new Date(dt_next)
+
+                    if(firstDay.getDate() === recordDate) {
+                        day_record.push(rowData.main.temp)
+                    }
+                }
+            })
+        }    
+    }
+    Weather.fetchData()
+}   
+
+const submit = document.getElementById("submit")
+submit.addEventListener('click', getWeatherData)
