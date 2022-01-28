@@ -6,12 +6,13 @@ body{
     padding: 0;
 }
 main{
-    
   margin-left: 0%;
 }
 .user{
     display: grid;
     grid-template-columns: 1fr 1fr;
+    margin-top: 5%;
+    margin-left: 5%;
 }
 .userInput{
     padding: 5%;
@@ -22,12 +23,14 @@ main{
     border: none;
     border-radius: 10px;
     text-align: center;
+    font-size: 15px;
 }
 #submit{
     width: 10%;
     height: 50px;
     border: none;
     border-radius: 10px;
+    background-color: orangered;
  }
 #currentTime{
     font-size: 30px;
@@ -39,8 +42,8 @@ main{
  display: grid;
  grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
  grid-gap: 2%;
- margin-top: 23%;
- background-color: rgb(31, 30, 30);
+ margin-top: 18%;
+ background-color: rgb(61, 56, 56);
  color: white;
 
 }
@@ -56,3 +59,10 @@ span{
     font-weight: bold;
     font-size: 40px;
 }
+#img{
+    width: 20px;
+    height: 20px;
+}
+@media only screen and (max-width: 980px) {
+    
+  }

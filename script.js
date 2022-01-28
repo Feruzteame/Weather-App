@@ -9,8 +9,6 @@ let renderWeather = document.getElementById("weather")
     const date = new Date();
     let hour = date.getHours();
     let min = date.getMinutes();
-    let minutes;
-
     if(min < 10){
         min = `0${min}`
       }
@@ -26,7 +24,6 @@ let t = setTimeout(function(){ currentTime() }, 1000)
   currentTime()
  
 
-
 const getWeatherData = function() {
     let Weather = {
         
@@ -35,9 +32,13 @@ const getWeatherData = function() {
 
        // fetch data
         fetchData : function fetchData() {
+           
             fetch('https://api.openweathermap.org/data/2.5/forecast?q=' + this.getCity + '&units=metric' + '&appid='+ key)
             .then(response => response.json())
             .then(data => {
+                if(this.getCity == ""){
+                   alert("pls put city name!")
+                }
                 let listData = data.list
                 this.dayData(listData)
                 console.log(listData)
@@ -100,15 +101,6 @@ const getWeatherData = function() {
             }
          },
 
-        // getIcon: function getIcon(i){
-        //     if(this.days_record[0].length) {
-        //         let icon= this.days_record[i][0].weather[0].icon
-        //         let iconImg = document.createElement("img") 
-        //         icon.src= `"http://openweathermap.org/img/wn/${icon}.png"`
-        //         console.log(iconImg)
-        //     }
-        //    },
-
         // render average
         renderAverage : function renderAverage(i) {
             if(this.days_record[0].length) { 
@@ -119,6 +111,7 @@ const getWeatherData = function() {
            },
 
         dayData : function dayData(listData) {
+            
             let firstDay = new Date()
             let day_record = []
             this.separateDailyRecord(listData, firstDay, day_record)
@@ -160,8 +153,8 @@ const getWeatherData = function() {
                 document.getElementById("city").value = ""
         },  
 }
-    Weather.fetchData()
+Weather.fetchData()
 }   
 
 const submit = document.getElementById("submit")
-submit.addEventListener('click', getWeatherData)
+submit.addEventListener('click', getWeatherData)  
