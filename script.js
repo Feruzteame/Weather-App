@@ -1,5 +1,6 @@
 import {Config} from "./config.js";
 const key = Config.key;
+
 let renderWeather = document.getElementById("weather")
 
  // get current Time
@@ -7,18 +8,19 @@ let renderWeather = document.getElementById("weather")
     let currentTiming = document.getElementById("currentTime");
     const date = new Date();
     let hour = date.getHours();
-    console.log(hour)
     let min = date.getMinutes();
+    let minutes;
+
     if(min < 10){
-       let minutes = `0${min}`
-       if(hour <= "12"){
-        let time = `${hour}:${minutes}am`
+        min = `0${min}`
+      }
+    if(hour <= "12"){
+    let time = `<span>${hour}:${min}</span> am`
+    currentTiming.innerHTML = time; 
+    }else {
+        let time = `<span>${hour}:${min}</span> pm`
         currentTiming.innerHTML = time; 
-     }else {
-         let time = `${hour}:${minutes}pm`
-         currentTiming.innerHTML = time; 
-     }
-  }
+    }
 let t = setTimeout(function(){ currentTime() }, 1000)
   }
   currentTime()
@@ -149,12 +151,13 @@ const getWeatherData = function() {
                 let firstChild =  renderWeather.children[0]
                 firstChild.id = "today";
                 firstChild.setAttribute(
-                    "style", " color:purple; transform: scale(1.1);");
+                    "style", " color:orange; transform: scale(1.1);");
                 
                 let firstChildOfChild =  firstChild.children[0]
                 firstChildOfChild.setAttribute(
-                    "style", "font-size: 40px; font-style: italic; color:purple; margin-top:-15%;line-height: 60px;");
+                    "style", "font-size: 40px; font-style: italic; color:orangered; margin-top:-15%;line-height: 60px;");
                 }
+                document.getElementById("city").value = ""
         },  
 }
     Weather.fetchData()
