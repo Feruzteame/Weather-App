@@ -1,38 +1,21 @@
 import {Config} from "./config.js";
-const key = Config.key;
 
-let renderWeather = document.getElementById("weather")
-let cityName = document.getElementById("cityName")
-
- // get current Time
- function currentTime(){
-    let currentTiming = document.getElementById("currentTime");
-    const date = new Date();
-    let hour = date.getHours();
-    let min = date.getMinutes();
-    if(min < 10){
-        min = `0${min}`
-      }
-    if(hour <= "12"){
-    let time = `<span>${hour}:${min}</span> am`
-    currentTiming.innerHTML = time; 
-    }else {
-        let time = `<span>${hour}:${min}</span> pm`
-        currentTiming.innerHTML = time; 
-    }
-let t = setTimeout(function(){ currentTime() }, 1000)
-  }
-  currentTime()
- 
-
-const getWeatherData = function() {
+export const getWeatherData = function() {
+    let renderWeather = document.getElementById("weather")
+    let cityName = document.getElementById("cityName")
+    const key = Config.key;
     let Weather = {
         
         getCity : document.getElementById("city").value,
         days_record : [],
-
-       // fetch data
+        graph_date: [],
+        graph_temp: [],
+        
+         // fetch data
         fetchData : function fetchData() {
+            console.log( this.days_record)
+            console.log( this.graph_date)
+            console.log( this.graph_temp)
            
             fetch('https://api.openweathermap.org/data/2.5/forecast?q=' + this.getCity + '&units=metric' + '&appid='+ key)
             .then(response => response.json())
@@ -45,12 +28,11 @@ const getWeatherData = function() {
                 console.log(listData);
 
                 let valueCity = this.getCity
-                valueCity.toUpperCase();
+                // valueCity.toUpperCase();
                 cityName.innerHTML = valueCity
             })
         },
 
-        
          //  separate each of the days
          separateDailyRecord : function separateDailyRecord(listData,firstDay, day_record) {
             listData.forEach(rowData => {
@@ -121,7 +103,8 @@ const getWeatherData = function() {
             let firstDay = new Date()
             let day_record = []
             this.separateDailyRecord(listData, firstDay, day_record)
-            console.log(this.days_record)
+    
+            
             for(let i =0; i < this.days_record.length; i++){
                 let icon = this.days_record[i][0].weather[0].icon
                 let container = document.createElement("DIV")
@@ -134,8 +117,10 @@ const getWeatherData = function() {
                 let image = document.createElement("img")
            
                 p_date.innerHTML = this.getStrDate(i)
+                this.graph_date.push(this.getStrDate(i))
                 p_weather.innerHTML = this.getWeather(i)
                 p_average.innerHTML = this.renderAverage(i)
+                this.graph_temp.push(parseFloat(this.renderAverage(i).substring(-1, 1)))
                 p_Description.innerHTML = this.getWeatherDescription(i)
                 image.src = `http://openweathermap.org/img/wn/${icon}@2x.png`
               
@@ -155,12 +140,40 @@ const getWeatherData = function() {
                 let firstChildOfChild =  firstChild.children[0]
                 firstChildOfChild.setAttribute(
                     "style", "font-size: 40px; font-style: italic; color:orangered; margin-top:-15%;line-height: 60px;");
-                }
+        }
+        const labels = this.graph_temp
+        const dataDt = this.graph_date
+
+        const data = {
+            labels: dataDt,
+            datasets: [{
+            label: 'Weekly temperature graph',
+            backgroundColor: 'rgb(255, 99, 132)',
+            borderColor: 'rgb(255, 99, 132)',
+            data: labels,
+            }]
+        };
+
+        const config = {
+            type: 'bar',
+            data: data,
+            options: {}
+        };
+        const myChart = new Chart(
+            document.getElementById('myChart'),
+            config
+        );
                 document.getElementById("city").value = ""
-        },  
-}
+                }
+        }
+
 Weather.fetchData()
 }   
 
-const submit = document.getElementById("submit")
-submit.addEventListener('click', getWeatherData)  
+
+
+
+
+
+
+
