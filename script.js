@@ -2,6 +2,7 @@ import {Config} from "./config.js";
 const key = Config.key;
 
 let renderWeather = document.getElementById("weather")
+let cityName = document.getElementById("cityName")
 
  // get current Time
  function currentTime(){
@@ -41,10 +42,15 @@ const getWeatherData = function() {
                 }
                 let listData = data.list
                 this.dayData(listData)
-                console.log(listData)
+                console.log(listData);
+
+                let valueCity = this.getCity
+                valueCity.toUpperCase();
+                cityName.innerHTML = valueCity
             })
         },
-       
+
+        
          //  separate each of the days
          separateDailyRecord : function separateDailyRecord(listData,firstDay, day_record) {
             listData.forEach(rowData => {

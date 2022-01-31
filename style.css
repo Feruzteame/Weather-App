@@ -11,7 +11,7 @@ main{
 .user{
     display: grid;
     grid-template-columns: 1fr 1fr;
-    margin-top: 5%;
+    margin-top: 1%;
     margin-left: 5%;
 }
 .userInput{
@@ -45,7 +45,6 @@ main{
  margin-top: 18%;
  background-color: rgb(61, 56, 56);
  color: white;
-
 }
 .container{
     padding: 20% 5% 5% 0%;
@@ -63,6 +62,41 @@ span{
     width: 20px;
     height: 20px;
 }
+#cityName{
+    font-size: 60px;
+      }
+
 @media only screen and (max-width: 980px) {
-    
+    .user{
+        display: grid;
+        grid-template-columns: 1fr ;
+    }
+    #weather{
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-gap: 0%;
+        height: auto;
+        min-height: 100%;
+       }
+       .container{
+        padding: 0% 0% 0% 0%;
+        text-align: center;
+        height: 200px;
+        font-size: 15px;
+        line-height: 20px;
+    }
+    #today{
+        margin-top: 20%;
+        line-height: 20px;
+    }
+    #cityName{
+        text-align: center;
+        font-size: 40px;
+    }
+    #submit{
+        width: 20%;
+     }
+     #city{
+        width: 70%;
+    }
   }
