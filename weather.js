@@ -1,12 +1,12 @@
 import {Config} from "./config.js";
+const key = Config.key;
+let renderWeather = document.getElementById("weather")
+let cityName = document.getElementById("cityName")
 
 export const getWeatherData = function() {
-    let renderWeather = document.getElementById("weather")
-    let cityName = document.getElementById("cityName")
-    const key = Config.key;
+    
     let Weather = {
-        
-        getCity : document.getElementById("city").value,
+         getCity : document.getElementById("city").value,
         days_record : [],
         graph_date: [],
         graph_temp: [],
