@@ -148,8 +148,9 @@ export const getWeatherData = function() {
             labels: dataDt,
             datasets: [{
             label: 'Weekly temperature graph',
-            backgroundColor: 'rgb(255, 99, 132)',
-            borderColor: 'rgb(255, 99, 132)',
+            backgroundColor: ['blue', "green", "red", "yellow", "purple"],
+            hoverBorderWidth: "3px",
+            hoverBorderColor: "black",
             data: labels,
             }]
         };

@@ -42,7 +42,7 @@ main{
  display: grid;
  grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
  grid-gap: 2%;
- margin-top: 18%;
+ margin-top: -10%;
  background-color: rgb(61, 56, 56);
  color: white;
 }
@@ -64,7 +64,12 @@ span{
 }
 #cityName{
     font-size: 60px;
+    margin-left: 10%;
       }
+#canvas{
+    width: 60%;
+    height: 400px;
+    }
 
 @media only screen and (max-width: 980px) {
     .user{
@@ -77,6 +82,7 @@ span{
         grid-gap: 0%;
         height: auto;
         min-height: 100%;
+        margin-top: -70%;
        }
        .container{
         padding: 0% 0% 0% 0%;
@@ -90,7 +96,7 @@ span{
         line-height: 20px;
     }
     #cityName{
-        text-align: center;
+        text-align: left;
         font-size: 40px;
     }
     #submit{
@@ -99,4 +105,9 @@ span{
      #city{
         width: 70%;
     }
+    #canvas{
+        width: 90%;
+        height: 400px;
+        margin-top: 15%;
+        }
   }
