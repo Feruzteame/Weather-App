@@ -3,10 +3,12 @@ const key = Config.key;
 let renderWeather = document.getElementById("weather")
 let cityName = document.getElementById("cityName")
 
+
+
 export const getWeatherData = function() {
     
     let Weather = {
-         getCity : document.getElementById("city").value,
+        getCity : document.getElementById("city").value,
         days_record : [],
         graph_date: [],
         graph_temp: [],
@@ -141,29 +143,30 @@ export const getWeatherData = function() {
                 firstChildOfChild.setAttribute(
                     "style", "font-size: 40px; font-style: italic; color:orangered; margin-top:-15%;line-height: 60px;");
         }
-        const labels = this.graph_temp
-        const dataDt = this.graph_date
+                        // graph
+                const labels = this.graph_temp
+                const dataDt = this.graph_date
 
-        const data = {
-            labels: dataDt,
-            datasets: [{
-            label: 'Weekly temperature graph',
-            backgroundColor: ['blue', "green", "red", "yellow", "purple"],
-            hoverBorderWidth: "3px",
-            hoverBorderColor: "black",
-            data: labels,
-            }]
-        };
+                const data = {
+                    labels: dataDt,
+                    datasets: [{
+                    label: 'Weekly temperature graph',
+                    backgroundColor: ['blue', "green", "red", "yellow", "purple"],
+                    hoverBorderWidth: "3px",
+                    hoverBorderColor: "black",
+                    data: labels,
+                    }]
+                };
 
-        const config = {
-            type: 'bar',
-            data: data,
-            options: {}
-        };
-        const myChart = new Chart(
-            document.getElementById('myChart'),
-            config
-        );
+                const config = {
+                    type: 'bar',
+                    data: data,
+                    options: {}
+                };
+                const myChart = new Chart(
+                    document.getElementById('myChart'),
+                    config
+                );
                 document.getElementById("city").value = ""
                 }
         }

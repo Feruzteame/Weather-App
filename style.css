@@ -71,7 +71,7 @@ span{
     height: 400px;
     }
 
-@media only screen and (max-width: 980px) {
+@media only screen and (max-width: 600px) {
     .user{
         display: grid;
         grid-template-columns: 1fr ;
@@ -82,7 +82,7 @@ span{
         grid-gap: 0%;
         height: auto;
         min-height: 100%;
-        margin-top: -70%;
+        margin-top: -50%;
        }
        .container{
         padding: 0% 0% 0% 0%;
