@@ -12,30 +12,20 @@
 <body>
     <main>
         <div class="user">
-            <div>
+            <div id="container">
                 <p id="currentTime"></p>
-            </div>
-            <div class="userInput">
-                
-                <label for="name">
+                <div class="userInput">
                     <input type="text" name="name" id="city" placeholder="Search by city">
-                </label>
-                <label for="submit">
-                    <button id="submit"><img src="https://img.icons8.com/external-dreamstale-lineal-dreamstale/32/000000/external-search-ui-dreamstale-lineal-dreamstale.png" id="img"/></button>
-                </label>
-                
+                    <button id="submit"><img src='./image/search.svg' width="25px" height="30px"/></button>
+                </div>
             </div>
             <h1 id="cityName"></h1>
             <div id="canvas">
                 <canvas id="myChart"></canvas>
             </div>
-            
          </div>
         <div id="weather"></div>
-       
     </main>
-   
-    
     <script src="./time.js" type="module" defer></script>
     <script src="./weather.js" type="module" defer></script>
     <script src="./index.js" type="module" defer></script> 

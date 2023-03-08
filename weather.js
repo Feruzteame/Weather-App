@@ -1,14 +1,12 @@
 import {Config} from "./config.js";
 const key = Config.key;
+
 let renderWeather = document.getElementById("weather")
 let cityName = document.getElementById("cityName")
 
-
-
 export const getWeatherData = function() {
-    
     let Weather = {
-        getCity : document.getElementById("city").value,
+        getCity : document.getElementById("city").value ,
         days_record : [],
         graph_date: [],
         graph_temp: [],
@@ -18,19 +16,18 @@ export const getWeatherData = function() {
             console.log( this.days_record)
             console.log( this.graph_date)
             console.log( this.graph_temp)
-           
-            fetch('https://api.openweathermap.org/data/2.5/forecast?q=' + this.getCity + '&units=metric' + '&appid='+ key)
+            
+            fetch('https://api.openweathermap.org/data/2.5/forecast?q=' + this.getCity + '&units=metric' + '&appid=' + key)
             .then(response => response.json())
             .then(data => {
+                console.log(data)
                 if(this.getCity == ""){
                    alert("pls put city name!")
                 }
                 let listData = data.list
                 this.dayData(listData)
                 console.log(listData);
-
                 let valueCity = this.getCity
-                // valueCity.toUpperCase();
                 cityName.innerHTML = valueCity
             })
         },
@@ -137,11 +134,11 @@ export const getWeatherData = function() {
                 let firstChild =  renderWeather.children[0]
                 firstChild.id = "today";
                 firstChild.setAttribute(
-                    "style", " color:orange; transform: scale(1.1);");
+                    "style", "font-size: 20px; font-style: italic; color:#0443F2;");
                 
                 let firstChildOfChild =  firstChild.children[0]
                 firstChildOfChild.setAttribute(
-                    "style", "font-size: 40px; font-style: italic; color:orangered; margin-top:-15%;line-height: 60px;");
+                    "style", "font-size: 40px; font-style: italic; color:#0443F2;; margin-top:-15%;line-height: 60px;");
         }
                         // graph
                 const labels = this.graph_temp
@@ -150,8 +147,8 @@ export const getWeatherData = function() {
                 const data = {
                     labels: dataDt,
                     datasets: [{
-                    label: 'Weekly temperature graph',
-                    backgroundColor: ['blue', "green", "red", "yellow", "purple"],
+                    label: `Weekly temperature graph ${this.getCity} `,
+                    backgroundColor: ['#f5536f', '#FF2700'],
                     hoverBorderWidth: "3px",
                     hoverBorderColor: "black",
                     data: labels,
