@@ -1,40 +1,36 @@
 // import {Config} from "./config.js";
 // const key = Config.key;
 
-let renderWeather = document.getElementById("weather")
-let cityName = document.getElementById("cityName")
+const renderWeather = document.getElementById("weather")
+const cityName = document.getElementById("cityName")
+const weather_ul = document.querySelector('#weather')
+const daily_li = weather_ul.querySelectorAll('li')
 
-export const getWeatherData = function(config, myChart) {
+export const getWeatherData = function(city, config, myChart) {
     let Weather = {
-        getCity : document.getElementById("city").value ,
         days_record : [],
         graph_date: [],
         graph_temp: [],
         
             // fetch data
         fetchData : function fetchData() {
-            console.log( this.days_record)
-            console.log( this.graph_date)
-            console.log( this.graph_temp)
-
-            if(cityName.value === ''){
-
-            } else{
-
-            }         
-            fetch('https://api.openweathermap.org/data/2.5/forecast?q=' + this.getCity + '&units=metric' + '&appid=' + '3a5c287c9cf2cb57fab7aa0bb05f65b1')
-            .then(response => response.json())
-            .then(data => {
-                console.log(data)
-                if(this.getCity == ""){
-                    alert("pls put city name!")
-                }
-                let listData = data.list
-                this.dayData(listData)
-                console.log(listData);
-                let valueCity = this.getCity
-                cityName.innerHTML = valueCity
-            })
+            if(city !== '') {
+                fetch('https://api.openweathermap.org/data/2.5/forecast?q=' + city + '&units=metric' + '&appid=' + '3a5c287c9cf2cb57fab7aa0bb05f65b1')
+                .then(response => response.json())
+                .then(data => {
+                    if(data.cod === '404'){
+                        alert(data.message)
+                        return
+                    }
+                    let listData = data.list
+                    this.dayData(listData)
+                    console.log(listData);
+                    let valueCity = city
+                    cityName.innerHTML = valueCity
+                })
+            } else {
+                alert('pleas put city name')
+            }
         },
 
             //  separate each of the days
@@ -106,9 +102,6 @@ export const getWeatherData = function(config, myChart) {
             let firstDay = new Date()
             let day_record = []
             this.separateDailyRecord(listData, firstDay, day_record)
-
-            const weather_ul = document.querySelector('#weather')
-            const daily_li = weather_ul.querySelectorAll('li')
         
             this.days_record = this.days_record.filter(day_record => day_record.length > 0);
             
@@ -123,26 +116,16 @@ export const getWeatherData = function(config, myChart) {
 
                 this.graph_date.push(this.getStrDate(i))
                 this.graph_temp.push(parseFloat(this.renderAverage(i).substring(-1, 1)))
-                
-                
-                // style
-                let firstChild =  renderWeather.children[0]
-                firstChild.id = "today";
-                firstChild.setAttribute(
-                    "style", "font-size: 20px; font-style: italic; color:#0443F2;");
-                let firstChildOfChild =  firstChild.children[0]
-                firstChildOfChild.setAttribute(
-                    "style", "font-size: 40px; font-style: italic; color:#0443F2;; margin-top:-15%;line-height: 60px;");
             }
 
             // graph
             const labels = this.graph_temp
             const dataDt = this.graph_date
 
-            config.data = data = {
+            config.data = {
                 labels: dataDt,
                 datasets: [{
-                label: `Weekly temperature graph ${this.getCity} `,
+                label: `Weekly temperature graph ${city} `,
                 backgroundColor: ['green','red','purple', 'yellow','pink'],
                 hoverBorderWidth: "3px",
                 hoverBorderColor: "black",
@@ -151,8 +134,6 @@ export const getWeatherData = function(config, myChart) {
             };
 
             myChart.update(config);
-            document.getElementById("city").value = ""
-
         }
     }
 

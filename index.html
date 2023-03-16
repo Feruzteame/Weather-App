@@ -4,63 +4,65 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    
-    <title>Weather App</title>
+    <meta name="Weather App" content="Checking weather based on city" style="user-select: auto;">
+    <link rel="shortcut icon" href="./image//cloudy.ico">
+    <title>Check Your City Weather</title>
+     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
-    <main>
-        <div class="user">
-            <div id="container">
-                <p id="currentTime"></p>
-                <div class="userInput">
-                    <input type="text" name="name" id="city" placeholder="Search by city">
-                    <button id="submit"><img src='./image/search.svg' width="25px" height="30px"/></button>
-                </div>
-            </div>
-            <h1 id="cityName"></h1>
-            <div id="canvas">
-                <canvas id="myChart"></canvas>
+    <video id="video" class='d-none d-lg-block' style="position:absolute; object-fit:cover; width:100%; height:100%" autoplay muted loop>
+        <source type="video/mp4">
+    </video>
+    <main class="d-lg-flex flex-lg-column" style="font-family:Optima; position:absolute; width:100%; height:100%; background-color:#f6f4f462; backdrop-filter: blur(1px)">
+        <div class="d-lg-flex flex-sm-column flex-lg-row justify-content-around px-5 py-3 " style="background-color:#17a3b8">
+            <p id="currentTime" class="text-white align-self-end"></p>
+            <div class="userInput d-flex col-md-8 col-lg-4">
+                <input type="text" name="name" id="city" placeholder="Search by city" class="form-control m-1"/>
+                <button id="submit" type="button" class="btn btn-sm m-1 bg-warning">Search</button>
             </div>
         </div>
-        <ul id="weather">
-            <li>
+         <div id="canvas" class="d-flex flex-lg-row flex-column justify-content-between col-lg-4 my-5 ">
+            <h1 id="cityName" class="text-uppercase"></h1>
+            <canvas id="myChart" style="background-color: rgba(255, 255, 255, 0.67); margin-left:20px; padding:15px; border-radius:10px;"></canvas>
+        </div>
+        <div id="weather" class="container d-flex flex-column flex-md-row justify-content-between rounded-lg shadow px-0 overflow-auto" style="background-color:#17a3b8c0; height:auto;">
+            <li class="px-5 list-unstyled text-warning rounded-left text-center" style="background-color:#1514143a;backdrop-filter: blur(5px); border-bottom: 2px dotted #ffc107;">
                 <img class="p_image" src=""></img>
-                <p class="p_average"></p>
-                <p class="p_date"></p>
+                <p class="p_average font-weight-bold " style="font-size: 20px;"></p>
                 <p class="p_weather"></p>
                 <p class="p_Description"></p>
-            </li>
-            <li>
-                <img class="p_image" src=""></img>
-                <p class="p_average"></p>
                 <p class="p_date"></p>
+            </li>
+            <li class="px-5 list-unstyled text-center" style="border-bottom: 2px dotted #ffc107;">
+                <img class="p_image" src=""></img>
+                <p class="p_average font-weight-bold" style="font-size: 20px"></p>
                 <p class="p_weather"></p>
                 <p class="p_Description"></p>
-            </li>
-            <li>
-                <img class="p_image" src=""></img>
-                <p class="p_average"></p>
                 <p class="p_date"></p>
+            </li>
+            <li class="px-5 list-unstyled text-center" style="border-bottom: 2px dotted #ffc107;">
+                <img class="p_image" src=""></img>
+                <p class="p_average font-weight-bold" style="font-size: 20px"></p>
                 <p class="p_weather"></p>
                 <p class="p_Description"></p>
-            </li>
-            <li>
-                <img class="p_image" src=""></img>
-                <p class="p_average"></p>
                 <p class="p_date"></p>
+            </li>
+            <li class="px-5 list-unstyled text-center" style="border-bottom: 2px dotted #ffc107;">
+                <img class="p_image" src=""></img>
+                <p class="p_average font-weight-bold" style="font-size: 20px"></p>
                 <p class="p_weather"></p>
                 <p class="p_Description"></p>
-            </li>
-            <li>
-                <img class="p_image" src=""></img>
-                <p class="p_average"></p>
                 <p class="p_date"></p>
+            </li>
+            <li class="px-5 list-unstyled text-center" style="border-bottom: 2px dotted #ffc107;">
+                <img class="p_image" src=""></img>
+                <p class="p_average font-weight-bold" style="font-size: 20px"></p>
                 <p class="p_weather"></p>
                 <p class="p_Description"></p>
+                <p class="p_date"></p>
             </li>
-        </ul>   
+        </div>
     </main>
     <script src="./time.js" type="module" defer></script>
     <script src="./weather.js" type="module" defer></script>
