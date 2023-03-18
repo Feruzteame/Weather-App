@@ -1,6 +1,5 @@
 import {getWeatherData} from "./weather.js";
 
-
 // loop background video
 addEventListener('DOMContentLoaded', () => {
 
@@ -9,10 +8,7 @@ addEventListener('DOMContentLoaded', () => {
 
       var bgImages = [
       './image/bg1.mp4',
-      './image/bg2.mp4',
-      './image/bg3.mp4',
-      './image/bg4.mp4',
-      './image/bg5.mp4',
+      './image/bg4.mp4'
     ];
     var bgIndex = 0;
     function changeBackground() {
@@ -26,7 +22,7 @@ addEventListener('DOMContentLoaded', () => {
 
     }
     changeBackground()
-    setInterval(changeBackground, 20000);
+    setInterval(changeBackground, 15000);
 });
 
 // create Chart

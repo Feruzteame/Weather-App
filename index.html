@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="Weather App" content="Checking weather based on city" style="user-select: auto;">
     <link rel="shortcut icon" href="./image//cloudy.ico">
-    <title>Check Your City Weather</title>
+    <title>City Weather</title>
      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
@@ -17,7 +17,7 @@
     <main class="d-lg-flex flex-lg-column" style="font-family:Optima; position:absolute; width:100%; height:100%; background-color:#f6f4f462; backdrop-filter: blur(1px)">
         <div class="d-lg-flex flex-sm-column flex-lg-row justify-content-around px-5 py-3 " style="background-color:#17a3b8">
             <p id="currentTime" class="text-white align-self-end"></p>
-            <div class="userInput d-flex col-md-8 col-lg-4">
+            <div class="userInput d-flex col-md-8 col-lg-4 px-0">
                 <input type="text" name="name" id="city" placeholder="Search by city" class="form-control m-1"/>
                 <button id="submit" type="button" class="btn btn-sm m-1 bg-warning">Search</button>
             </div>
@@ -28,35 +28,35 @@
         </div>
         <div id="weather" class="container d-flex flex-column flex-md-row justify-content-between rounded-lg shadow px-0 overflow-auto" style="background-color:#17a3b8c0; height:auto;">
             <li class="px-5 list-unstyled text-warning rounded-left text-center" style="background-color:#1514143a;backdrop-filter: blur(5px); border-bottom: 2px dotted #ffc107;">
-                <img class="p_image" src=""></img>
+                <img class="p_image" alt='current weather icon' src=""></img>
                 <p class="p_average font-weight-bold " style="font-size: 20px;"></p>
                 <p class="p_weather"></p>
                 <p class="p_Description"></p>
                 <p class="p_date"></p>
             </li>
             <li class="px-5 list-unstyled text-center" style="border-bottom: 2px dotted #ffc107;">
-                <img class="p_image" src=""></img>
+                <img class="p_image" alt='current weather icon' src=""></img>
                 <p class="p_average font-weight-bold" style="font-size: 20px"></p>
                 <p class="p_weather"></p>
                 <p class="p_Description"></p>
                 <p class="p_date"></p>
             </li>
             <li class="px-5 list-unstyled text-center" style="border-bottom: 2px dotted #ffc107;">
-                <img class="p_image" src=""></img>
+                <img class="p_image" alt='current weather icon' src=""></img>
                 <p class="p_average font-weight-bold" style="font-size: 20px"></p>
                 <p class="p_weather"></p>
                 <p class="p_Description"></p>
                 <p class="p_date"></p>
             </li>
             <li class="px-5 list-unstyled text-center" style="border-bottom: 2px dotted #ffc107;">
-                <img class="p_image" src=""></img>
+                <img class="p_image" alt='current weather icon' src=""></img>
                 <p class="p_average font-weight-bold" style="font-size: 20px"></p>
                 <p class="p_weather"></p>
                 <p class="p_Description"></p>
                 <p class="p_date"></p>
             </li>
             <li class="px-5 list-unstyled text-center" style="border-bottom: 2px dotted #ffc107;">
-                <img class="p_image" src=""></img>
+                <img class="p_image" alt='current weather icon' src=""></img>
                 <p class="p_average font-weight-bold" style="font-size: 20px"></p>
                 <p class="p_weather"></p>
                 <p class="p_Description"></p>

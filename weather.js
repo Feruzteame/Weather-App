@@ -1,6 +1,3 @@
-// import {Config} from "./config.js";
-// const key = Config.key;
-
 const renderWeather = document.getElementById("weather")
 const cityName = document.getElementById("cityName")
 const weather_ul = document.querySelector('#weather')
@@ -15,7 +12,7 @@ export const getWeatherData = function(city, config, myChart) {
             // fetch data
         fetchData : function fetchData() {
             if(city !== '') {
-                fetch('https://api.openweathermap.org/data/2.5/forecast?q=' + city + '&units=metric' + '&appid=' + '3a5c287c9cf2cb57fab7aa0bb05f65b1')
+                fetch('https://api.openweathermap.org/data/2.5/forecast?q=' + city + '&units=metric' + '&appid=' + Apikey)
                 .then(response => response.json())
                 .then(data => {
                     if(data.cod === '404'){
